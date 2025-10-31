@@ -1,11 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        GowunBatang: ['"GowunBatang"', 'sans-serif'],
+        GowunBatangBold: ['"GowunBatang"', 'sans-serif'], // bold는 폰트-weight로 설정
+      },
+    },
   },
   plugins: [],
 };
