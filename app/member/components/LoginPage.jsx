@@ -1,14 +1,18 @@
+'use client';
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import NavBar from '../nav-bar/navBar';
-import Footer from '../footer/Footer';
-import { useNavigate } from 'react-router-dom';
-import { ThemeContext } from '../dark-mode/ThemeContext'; // ✅ 다크모드 context 가져오기
+import NavBar from '../../nav-bar/NavBar';
+import Footer from '../../footer/Footer';
+import { useRouter } from 'next/navigation';
+// import { useNavigate } from 'react-router-dom';
+
+// import { ThemeContext } from '../dark-mode/ThemeContext'; // ✅ 다크모드 context 가져오기
 
 const LoginPage = () => {
-  const serverUrl = process.env.REACT_APP_BACK_END_API_URL;
-  const navigate = useNavigate();
-  const { darkMode } = useContext(ThemeContext); // ✅ 다크모드 상태 가져오기
+  const router = useRouter();
+  const serverUrl = process.env.NEXT_PUBLIC_BACK_END_API_URL;
+  // const navigate = useNavigate();
+  // const { darkMode } = useContext(ThemeContext); // ✅ 다크모드 상태 가져오기
 
   const [formData, setFormData] = useState({
     id: '',
@@ -20,7 +24,7 @@ const LoginPage = () => {
   };
 
   const handleSignUpPage = () => {
-    navigate('/signup');
+    router.push('/member/signup');
   };
 
   const handleSubmit = async (e) => {
@@ -40,7 +44,7 @@ const LoginPage = () => {
       localStorage.setItem('nickname', nickname);
 
       alert(`${nickname}님, 환영합니다!`);
-      window.location.href = '/meme';
+      window.location.href = '/meme/list';
     } catch (error) {
       console.error('로그인 실패:', error);
       alert('아이디 또는 비밀번호가 올바르지 않습니다.');
@@ -48,18 +52,12 @@ const LoginPage = () => {
   };
 
   return (
-    <div
-      className={darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'}
-    >
+    <div className={'bg-gray-100 text-black'}>
       <NavBar />
       <div className="flex items-center justify-center min-h-screen px-4">
         <div
           className={`w-full max-w-md p-8 space-y-6 rounded-2xl shadow-lg transition 
-          ${
-            darkMode
-              ? 'bg-gray-800 shadow-gray-700'
-              : 'bg-white shadow-gray-300'
-          }`}
+          ${'bg-white shadow-gray-300'}`}
         >
           {/* 헤더 */}
           <div className="text-center">
@@ -80,11 +78,7 @@ const LoginPage = () => {
                 onChange={handleChange}
                 required
                 className={`w-full rounded-xl p-3 border focus:ring-2 transition 
-                ${
-                  darkMode
-                    ? 'bg-gray-700 border-gray-600 focus:ring-blue-400'
-                    : 'bg-gray-50 border-gray-300 focus:ring-blue-300'
-                }`}
+                ${'bg-gray-50 border-gray-300 focus:ring-blue-300'}`}
                 placeholder="아이디를 입력하세요"
               />
             </div>
@@ -98,11 +92,7 @@ const LoginPage = () => {
                 onChange={handleChange}
                 required
                 className={`w-full rounded-xl p-3 border focus:ring-2 transition 
-                ${
-                  darkMode
-                    ? 'bg-gray-700 border-gray-600 focus:ring-blue-400'
-                    : 'bg-gray-50 border-gray-300 focus:ring-blue-300'
-                }`}
+                ${'bg-gray-50 border-gray-300 focus:ring-blue-300'}`}
                 placeholder="비밀번호를 입력하세요"
               />
             </div>

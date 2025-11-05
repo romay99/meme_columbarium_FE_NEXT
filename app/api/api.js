@@ -1,6 +1,8 @@
+'use client';
 import axios from 'axios';
 
-const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:8080';
+const serverUrl =
+  process.env.NEXT_PUBLIC_BACK_END_API_URL || 'http://localhost:8080';
 
 // Axios 인스턴스 생성
 const api = axios.create({

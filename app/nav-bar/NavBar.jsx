@@ -15,8 +15,8 @@ function NavBar() {
 
   const menus = [
     { name: '홈', path: '/' },
-    { name: '밈 납골당', path: '/meme' },
-    { name: '자유 게시판', path: '/board' },
+    { name: '밈 납골당', path: '/meme/list' },
+    { name: '자유 게시판', path: '/board/list' },
     { name: '소개', path: '/intro' },
     { name: '마이 페이지', path: '/mypage' },
   ];
@@ -80,7 +80,7 @@ function NavBar() {
         {/* 우측 버튼 그룹 */}
         <div className="flex items-center space-x-2">
           {/* 다크모드 버튼 */}
-          <button
+          {/* <button
             onClick={() => setDarkMode(!darkMode)}
             className={`px-3 py-1 rounded transition-colors duration-300 ${
               darkMode
@@ -89,13 +89,13 @@ function NavBar() {
             }`}
           >
             {darkMode ? '☀️' : '🌙'}
-          </button>
+          </button> */}
 
           {/* 로그인/로그아웃 버튼 (PC) */}
           <div className="hidden md:flex items-center space-x-2">
             {!token ? (
               <Link
-                href="/login"
+                href="/member/login"
                 className={`font-GowunBatangBold px-4 py-2 rounded-lg transition-colors duration-300 ${
                   darkMode
                     ? 'bg-gray-600 text-white hover:bg-gray-500'

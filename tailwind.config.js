@@ -5,9 +5,9 @@ module.exports = {
     extend: {
       fontFamily: {
         GowunBatang: ['"GowunBatang"', 'sans-serif'],
-        GowunBatangBold: ['"GowunBatang"', 'sans-serif'], // bold는 폰트-weight로 설정
+        GowunBatangBold: ['"GowunBatangBold"', 'sans-serif'], // bold는 폰트-weight로 설정
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };

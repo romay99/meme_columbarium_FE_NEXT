@@ -1,14 +1,17 @@
+'use client';
 import React, { useState, useContext, useEffect } from 'react';
-import NavBar from '../nav-bar/navBar';
-import Footer from '../footer/Footer';
+import NavBar from '../../nav-bar/NavBar';
+import Footer from '../../footer/Footer';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { ThemeContext } from '../dark-mode/ThemeContext';
+import { useRouter } from 'next/navigation';
+// import { ThemeContext } from '../dark-mode/ThemeContext';
 
 const SignUpPage = () => {
-  const serverUrl = process.env.REACT_APP_BACK_END_API_URL;
-  const { darkMode } = useContext(ThemeContext);
-  const navigate = useNavigate();
+  const serverUrl = process.env.NEXT_PUBLIC_BACK_END_API_URL;
+  // const { darkMode } = useContext(ThemeContext);
+  // const navigate = useNavigate();
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     id: '',
@@ -112,7 +115,7 @@ const SignUpPage = () => {
         nickname,
       });
       alert(response.data);
-      navigate('/login');
+      router.push('/member/login');
     } catch (error) {
       alert(error.response?.data || '회원가입 실패');
     }
@@ -136,27 +139,15 @@ const SignUpPage = () => {
     formData.password === formData.passwordConfirm;
 
   return (
-    <div
-      className={`${
-        darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'
-      } min-h-screen`}
-    >
+    <div className={`${'bg-gray-100 text-black'} min-h-screen`}>
       <NavBar />
       <div className="flex items-center justify-center min-h-screen px-4 my-5">
         <div
-          className={`w-full max-w-md p-8 space-y-6 rounded-2xl shadow-lg transition ${
-            darkMode
-              ? 'bg-gray-800 shadow-gray-700'
-              : 'bg-white shadow-gray-300'
-          }`}
+          className={`w-full max-w-md p-8 space-y-6 rounded-2xl shadow-lg transition ${'bg-white shadow-gray-300'}`}
         >
           <div>
             <h2 className="text-2xl font-bold text-center">회원가입</h2>
-            <p
-              className={`mt-2 text-sm text-center ${
-                darkMode ? 'text-gray-400' : 'text-gray-500'
-              }`}
-            >
+            <p className={`mt-2 text-sm text-center ${'text-gray-500'}`}>
               계정 정보를 입력해주세요
             </p>
           </div>
@@ -164,11 +155,7 @@ const SignUpPage = () => {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* 아이디 */}
             <div className="flex flex-col">
-              <label
-                className={`block text-sm font-medium ${
-                  darkMode ? 'text-gray-300' : 'text-gray-700'
-                }`}
-              >
+              <label className={`block text-sm font-medium ${'text-gray-700'}`}>
                 아이디
               </label>
               <div className="flex gap-2 mt-1">
@@ -178,21 +165,13 @@ const SignUpPage = () => {
                   value={formData.id}
                   onChange={handleChange}
                   required
-                  className={`flex-1 w-full rounded-xl shadow-sm p-3 border focus:ring-2 focus:ring-blue-300 transition ${
-                    darkMode
-                      ? 'bg-gray-700 border-gray-600 text-white focus:border-blue-400'
-                      : 'bg-gray-50 border-gray-300 text-black focus:border-blue-500'
-                  }`}
+                  className={`flex-1 w-full rounded-xl shadow-sm p-3 border focus:ring-2 focus:ring-blue-300 transition ${'bg-gray-50 border-gray-300 text-black focus:border-blue-500'}`}
                   placeholder="아이디를 입력하세요"
                 />
                 <button
                   type="button"
                   onClick={checkId}
-                  className={`px-4 rounded-xl transition ${
-                    darkMode
-                      ? 'bg-gray-600 hover:bg-gray-500 text-white'
-                      : 'bg-gray-300 hover:bg-gray-400 text-black'
-                  }`}
+                  className={`px-4 rounded-xl transition ${'bg-gray-300 hover:bg-gray-400 text-black'}`}
                 >
                   중복확인
                 </button>
@@ -204,11 +183,7 @@ const SignUpPage = () => {
 
             {/* 비밀번호 */}
             <div>
-              <label
-                className={`block text-sm font-medium ${
-                  darkMode ? 'text-gray-300' : 'text-gray-700'
-                }`}
-              >
+              <label className={`block text-sm font-medium ${'text-gray-700'}`}>
                 비밀번호
               </label>
               <input
@@ -217,11 +192,7 @@ const SignUpPage = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className={`mt-1 w-full rounded-xl p-3 border shadow-sm focus:ring-2 transition ${
-                  darkMode
-                    ? 'bg-gray-700 border-gray-600 text-white focus:border-blue-400 focus:ring-blue-400'
-                    : 'bg-gray-50 border-gray-300 text-black focus:border-blue-500 focus:ring-blue-300'
-                }`}
+                className={`mt-1 w-full rounded-xl p-3 border shadow-sm focus:ring-2 transition ${'bg-gray-50 border-gray-300 text-black focus:border-blue-500 focus:ring-blue-300'}`}
                 placeholder="비밀번호를 입력하세요"
               />
               <div className="mt-1">
@@ -246,11 +217,7 @@ const SignUpPage = () => {
 
             {/* 비밀번호 확인 */}
             <div>
-              <label
-                className={`block text-sm font-medium ${
-                  darkMode ? 'text-gray-300' : 'text-gray-700'
-                }`}
-              >
+              <label className={`block text-sm font-medium ${'text-gray-700'}`}>
                 비밀번호 확인
               </label>
               <input
@@ -263,14 +230,8 @@ const SignUpPage = () => {
                   formData.passwordConfirm &&
                   formData.password !== formData.passwordConfirm
                     ? 'border-red-500'
-                    : darkMode
-                    ? 'border-gray-600'
                     : 'border-gray-300'
-                } ${
-                  darkMode
-                    ? 'bg-gray-700 text-white focus:border-blue-400 focus:ring-blue-400'
-                    : 'bg-gray-50 text-black focus:border-blue-500 focus:ring-blue-300'
-                }`}
+                } ${'bg-gray-50 text-black focus:border-blue-500 focus:ring-blue-300'}`}
                 placeholder="비밀번호를 다시 입력하세요"
               />
               {formData.passwordConfirm &&
@@ -283,11 +244,7 @@ const SignUpPage = () => {
 
             {/* 이메일 */}
             <div>
-              <label
-                className={`block text-sm font-medium ${
-                  darkMode ? 'text-gray-300' : 'text-gray-700'
-                }`}
-              >
+              <label className={`block text-sm font-medium ${'text-gray-700'}`}>
                 이메일
               </label>
               <input
@@ -297,16 +254,8 @@ const SignUpPage = () => {
                 onChange={handleChange}
                 required
                 className={`mt-1 w-full rounded-xl p-3 border shadow-sm focus:ring-2 transition ${
-                  !emailValid
-                    ? 'border-red-500'
-                    : darkMode
-                    ? 'border-gray-600'
-                    : 'border-gray-300'
-                } ${
-                  darkMode
-                    ? 'bg-gray-700 text-white focus:border-blue-400 focus:ring-blue-400'
-                    : 'bg-gray-50 text-black focus:border-blue-500 focus:ring-blue-300'
-                }`}
+                  !emailValid ? 'border-red-500' : 'border-gray-300'
+                } ${'bg-gray-50 text-black focus:border-blue-500 focus:ring-blue-300'}`}
                 placeholder="이메일을 입력하세요"
               />
               {!emailValid && (
@@ -318,11 +267,7 @@ const SignUpPage = () => {
 
             {/* 닉네임 */}
             <div className="flex flex-col">
-              <label
-                className={`block text-sm font-medium ${
-                  darkMode ? 'text-gray-300' : 'text-gray-700'
-                }`}
-              >
+              <label className={`block text-sm font-medium ${'text-gray-700'}`}>
                 닉네임
               </label>
               <div className="flex gap-2 mt-1">
@@ -332,21 +277,13 @@ const SignUpPage = () => {
                   value={formData.nickname}
                   onChange={handleChange}
                   required
-                  className={`flex-1 w-full rounded-xl shadow-sm p-3 border focus:ring-2 transition ${
-                    darkMode
-                      ? 'bg-gray-700 border-gray-600 text-white focus:border-blue-400 focus:ring-blue-400'
-                      : 'bg-gray-50 border-gray-300 text-black focus:border-blue-500 focus:ring-blue-300'
-                  }`}
+                  className={`flex-1 w-full rounded-xl shadow-sm p-3 border focus:ring-2 transition ${'bg-gray-50 border-gray-300 text-black focus:border-blue-500 focus:ring-blue-300'}`}
                   placeholder="닉네임을 입력하세요"
                 />
                 <button
                   type="button"
                   onClick={checkNickname}
-                  className={`px-4 rounded-xl transition ${
-                    darkMode
-                      ? 'bg-gray-600 hover:bg-gray-500 text-white'
-                      : 'bg-gray-300 hover:bg-gray-400 text-black'
-                  }`}
+                  className={`px-4 rounded-xl transition ${'bg-gray-300 hover:bg-gray-400 text-black'}`}
                 >
                   중복확인
                 </button>
@@ -372,9 +309,7 @@ const SignUpPage = () => {
               disabled={!allValid}
               className={`w-full py-3 rounded-xl font-semibold shadow transition ${
                 allValid
-                  ? darkMode
-                    ? 'bg-blue-600 hover:bg-blue-500 text-white'
-                    : 'bg-blue-600 hover:bg-blue-700 text-white'
+                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
                   : 'bg-gray-400 text-gray-200 cursor-not-allowed'
               }`}
             >
