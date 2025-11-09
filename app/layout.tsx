@@ -5,8 +5,9 @@ import { ThemeProvider } from "./dark-mode/ThemeContext";
 import { ReactNode } from "react";
 
 export const metadata = {
-  title: "RipMeme",
+  title: "밈 납골당",
   description: "유행지난 밈 저장소",
+  icons: "/favicon.ico",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
