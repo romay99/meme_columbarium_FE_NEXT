@@ -1,11 +1,11 @@
 import React from "react";
-import BoardDetailPage from "../../components/BoardDetailPage";
+import BoardUpdatePage from "../../components/BoardUpdatePage";
 
 export default async function Page({ params }) {
   const { id } = await params;
   return (
     <div>
-      <BoardDetailPage id={id}></BoardDetailPage>
+      <BoardUpdatePage memeCode={id}></BoardUpdatePage>
     </div>
   );
 }

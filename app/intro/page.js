@@ -1,10 +1,10 @@
 import React from "react";
-import { BoardListPage } from "../components/BoardListPage";
+import { IntroPage } from "./components/IntroPage";
 
 const page = () => {
   return (
     <div>
-      <BoardListPage />
+      <IntroPage></IntroPage>
     </div>
   );
 };

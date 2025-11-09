@@ -1,10 +1,10 @@
 import React from "react";
-import { BoardListPage } from "../components/BoardListPage";
+import BoardPostPage from "../../board/components/BoardPostPage";
 
 const page = () => {
   return (
     <div>
-      <BoardListPage />
+      <BoardPostPage></BoardPostPage>
     </div>
   );
 };

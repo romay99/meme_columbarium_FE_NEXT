@@ -1,8 +1,7 @@
-'use client';
-import axios from 'axios';
+"use client";
+import axios from "axios";
 
-const serverUrl =
-  process.env.NEXT_PUBLIC_BACK_END_API_URL || 'http://localhost:8080';
+const serverUrl = process.env.NEXT_PUBLIC_BACK_END_API_URL || "http://localhost:8080";
 
 // Axios 인스턴스 생성
 const api = axios.create({
@@ -13,7 +12,7 @@ const api = axios.create({
 // 요청 인터셉터: 매 요청마다 액세스 토큰 추가
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       config.headers.Authorization = `${token}`;
     }
@@ -28,32 +27,24 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (
-      error.response &&
-      error.response.status === 401 &&
-      !originalRequest._retry
-    ) {
+    if (error.response && error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true; // 무한루프 방지
 
       try {
         // ✅ 리프레시 토큰으로 새 액세스 토큰 발급
-        const res = await axios.post(
-          `${serverUrl}/member/refresh`,
-          {},
-          { withCredentials: true }
-        );
+        const res = await axios.post(`${serverUrl}/member/refresh`, {}, { withCredentials: true });
         const newToken = res.data.accessToken;
 
         // ✅ 로컬스토리지 갱신
-        localStorage.setItem('token', 'Bearer ' + newToken);
+        localStorage.setItem("token", "Bearer " + newToken);
 
         // ✅ Authorization 헤더 갱신 후 원래 요청 재시도
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return api(originalRequest);
       } catch (refreshErr) {
-        console.error('리프레시 토큰 실패:', refreshErr);
-        localStorage.removeItem('token');
-        window.location.href = '/login';
+        console.error("리프레시 토큰 실패:", refreshErr);
+        localStorage.removeItem("token");
+        window.location.href = "/member/login";
         return Promise.reject(refreshErr);
       }
     }
