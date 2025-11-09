@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "./dark-mode/ThemeContext";
 import { ReactNode } from "react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata = {
   title: "밈 납골당",
@@ -14,6 +15,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
       <head>
+        {/* GA */}
+        <GoogleAnalytics gaId="G-SHMKSCFDDJ" /> {/* 여기에 본인 GA4 측정 ID 입력 */}
         {/* Google AdSense 스크립트 */}
         <Script async strategy="afterInteractive" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4844671075935249" crossOrigin="anonymous" />
       </head>
