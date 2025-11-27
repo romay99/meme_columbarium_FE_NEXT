@@ -51,7 +51,7 @@ const SignUpPage = () => {
     }
 
     if (name === 'nickname') {
-      setNicknameValid(value.length >= 3);
+      setNicknameValid(value.length >= 3 && value.length <= 15);
     }
   };
 
@@ -78,6 +78,7 @@ const SignUpPage = () => {
   // 닉네임 중복 체크
   const checkNickname = async () => {
     if (!formData.nickname) return alert('닉네임을 입력해주세요.');
+    if (!nicknameValid) return alert('닉네임은 3자 이상 15자 이하여야 합니다.');
     try {
       const response = await axios.get(
         `${serverUrl}/member/check-nick-name/${formData.nickname}`
@@ -100,7 +101,7 @@ const SignUpPage = () => {
     if (!idAvailable) return alert('ID 중복 체크를 해주세요.');
     if (!idValid) return alert('아이디 형식이 올바르지 않습니다.');
     if (!nicknameAvailable) return alert('닉네임 중복 체크를 해주세요.');
-    if (!nicknameValid) return alert('닉네임은 3자 이상이어야 합니다.');
+    if (!nicknameValid) return alert('닉네임은 3자 이상 15자 이하여야 합니다.');
     if (!emailValid) return alert('올바른 이메일 형식이 아닙니다.');
     if (!passwordValid) return alert('비밀번호 형식이 올바르지 않습니다.');
     if (formData.password !== formData.passwordConfirm)
@@ -289,7 +290,9 @@ const SignUpPage = () => {
                 </button>
               </div>
               <div className="mt-1">
-                <ConditionItem valid={nicknameValid}>3자 이상</ConditionItem>
+                <ConditionItem valid={nicknameValid}>
+                  3자 이상 15자 이하
+                </ConditionItem>
                 {nicknameAvailable !== null && (
                   <p
                     className={`text-sm mt-1 ${
