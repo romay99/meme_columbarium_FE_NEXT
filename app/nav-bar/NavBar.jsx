@@ -164,7 +164,7 @@ function NavBar() {
           {/* 로그인/로그아웃 버튼 (모바일) */}
           {!token ? (
             <Link
-              href="/login"
+              href="/member/login"
               onClick={() => setIsSidebarOpen(false)}
               className={`font-GowunBatangBold mt-4 px-4 py-2 rounded-lg transition-colors duration-300 ${
                 darkMode
