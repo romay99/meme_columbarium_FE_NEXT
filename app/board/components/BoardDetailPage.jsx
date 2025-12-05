@@ -76,7 +76,7 @@ const BoardDetailPage = (props) => {
       if (err.response?.status === 401) {
         alert('로그인이 만료되었습니다. 다시 로그인해주세요.');
         localStorage.removeItem('token');
-        navigate('/login');
+        navigate('/member/login');
       } else {
         alert('댓글 등록에 실패했습니다.');
       }
@@ -101,7 +101,7 @@ const BoardDetailPage = (props) => {
       if (err.response?.status === 401) {
         alert('로그인이 만료되었습니다. 다시 로그인해주세요.');
         localStorage.removeItem('token');
-        navigate('/login');
+        navigate('/member/login');
       } else {
         alert('게시글 삭제에 실패했습니다.');
       }

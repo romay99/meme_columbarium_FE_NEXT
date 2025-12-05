@@ -46,7 +46,7 @@ const MemeDetailPage = () => {
       }
     } catch (err) {
       alert('로그인이 필요합니다');
-      navigate('/login');
+      navigate('/member/login');
     }
   };
 
@@ -103,7 +103,7 @@ const MemeDetailPage = () => {
       if (err.response?.status === 401) {
         alert('로그인이 만료되었습니다.');
         localStorage.removeItem('token');
-        navigate('/login');
+        navigate('/member/login');
       } else {
         console.error(err);
         alert('댓글 등록 실패');
