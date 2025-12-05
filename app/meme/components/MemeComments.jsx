@@ -23,7 +23,7 @@ const MemeComments = (props) => {
     const fetchComments = async () => {
       try {
         const res = await api.get(`${serverUrl}/comment/meme/list`, {
-          params: { page: commentPage, meme: props.memeCode },
+          params: { page: commentPage, meme: props.orgMemeCode },
         });
         setComments(res.data.data);
         setTotalCommentPages(res.data.totalPages);
@@ -46,7 +46,7 @@ const MemeComments = (props) => {
       }
       await api.post(
         `${serverUrl}/comment/meme/post`,
-        { memeCode: props.memeCode, contents: newComment },
+        { orgMemeCode: props.orgMemeCode, contents: newComment },
         { headers: { Authorization: token } }
       );
       setNewComment('');
@@ -82,13 +82,17 @@ const MemeComments = (props) => {
   const handleLikeClick = async () => {
     try {
       if (isLiked) {
-        await api.post(`${serverUrl}/likes/rm`, { memeCode: props.memeCode });
+        await api.post(`${serverUrl}/likes/rm`, {
+          memeCode: props.orgMemeCode,
+        });
         setMeme((prev) => ({ ...prev, likes: false }));
         setLikeCnt((prev) => prev - 1);
         setIsLiked(false);
         alert('꽃 한송이 거두어갑니다.');
       } else {
-        await api.post(`${serverUrl}/likes/add`, { memeCode: props.memeCode });
+        await api.post(`${serverUrl}/likes/add`, {
+          memeCode: props.orgMemeCode,
+        });
         setMeme((prev) => ({ ...prev, likes: true }));
         setLikeCnt((prev) => prev + 1);
         setIsLiked(true);
